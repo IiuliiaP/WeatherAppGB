@@ -14,17 +14,24 @@ import com.example.weatherappgb.viewmodel.WeatherDetailsViewModel
 
 class WeatherDetailsFragment : Fragment() {
     private lateinit var viewModel: WeatherDetailsViewModel
-    lateinit var binding: FragmentWeatherDetailsBinding
+    private var _binding: FragmentWeatherDetailsBinding? = null
+    private val binding: FragmentWeatherDetailsBinding
+    get(){
+        return _binding!!
+    }
 
     companion object {
         fun newInstance() = WeatherDetailsFragment()
     }
-
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentWeatherDetailsBinding.inflate(inflater, container,false)
+        _binding = FragmentWeatherDetailsBinding.inflate(inflater, container,false)
         return binding.root
     }
 
@@ -51,6 +58,5 @@ class WeatherDetailsFragment : Fragment() {
                 Toast.makeText(requireContext(),"успешная загрузка", Toast.LENGTH_LONG).show()
             }
         }
-
     }
 }
