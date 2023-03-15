@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.weatherappgb.R
 import com.example.weatherappgb.databinding.FragmentWeatherDetailsBinding
+import com.example.weatherappgb.model.Weather
 
 class WeatherDetailsFragment : Fragment() {
 
@@ -16,12 +18,19 @@ class WeatherDetailsFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance() = WeatherDetailsFragment()
+        const val BUNDLE_EXTRA = "weather"
+        fun newInstance(bundle: Bundle): WeatherDetailsFragment{
+            val fragment = WeatherDetailsFragment()
+            fragment.arguments = bundle
+            return fragment
+        }
     }
-    override fun onDestroy() {
-        super.onDestroy()
+
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,6 +40,18 @@ class WeatherDetailsFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-    }
+        val weather = arguments?.getParcelable<Weather>(BUNDLE_EXTRA)
+        if (weather != null) {
+            val city = weather.city
+            binding.cityName.text = city.name
+            binding.coordinates.text = String.format(
+                getString(R.string.city_coordinates),
+                city.lat.toString(),
+                city.lon.toString()
+            )
+            binding.temperature.text = weather.temperature.toString()
+            binding.feelsLike.text = weather.feelsLike.toString()
 
+        }
+    }
 }

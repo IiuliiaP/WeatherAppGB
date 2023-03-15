@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.weatherappgb.R
 
 import com.example.weatherappgb.databinding.FragmentWeatherListBinding
+import com.example.weatherappgb.model.Weather
 import com.example.weatherappgb.viewmodel.AppState
 import com.example.weatherappgb.viewmodel.WeatherListViewModel
 
@@ -23,7 +24,19 @@ class WeatherListFragment : Fragment() {
             return _binding!!
         }
 
-    private val adapter = WeatherListFragmentAdapter()
+    private val adapter = WeatherListFragmentAdapter(object: OnItemViewClickListener {
+        override fun onItemViewClick(weather: Weather) {
+            val manager = activity?.supportFragmentManager
+            if (manager != null) {
+                val bundle = Bundle()
+                bundle.putParcelable(WeatherDetailsFragment.BUNDLE_EXTRA, weather)
+                manager.beginTransaction()
+                    .replace(R.id.fragment_container, WeatherDetailsFragment.newInstance(bundle))
+                    .addToBackStack("")
+                    .commitAllowingStateLoss()
+            }
+            }
+        })
     private var isDataSetRus: Boolean = true
 
 
@@ -65,9 +78,13 @@ class WeatherListFragment : Fragment() {
         isDataSetRus = !isDataSetRus
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
+    }
+    override fun onDestroy() {
+        adapter.removeListener()
+        super.onDestroy()
     }
     fun renderData(data: AppState){
         when(data){
