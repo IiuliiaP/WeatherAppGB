@@ -14,10 +14,11 @@ import com.example.weatherappgb.databinding.FragmentWeatherListBinding
 import com.example.weatherappgb.model.Weather
 import com.example.weatherappgb.viewmodel.AppState
 import com.example.weatherappgb.viewmodel.WeatherListViewModel
+import com.google.android.material.snackbar.Snackbar
 
 
 class WeatherListFragment : Fragment() {
-    private lateinit var viewModel: WeatherListViewModel
+
     private var _binding: FragmentWeatherListBinding? = null
     private val binding: FragmentWeatherListBinding
         get(){
@@ -38,7 +39,9 @@ class WeatherListFragment : Fragment() {
             }
         })
     private var isDataSetRus: Boolean = true
-
+    val viewModel: WeatherListViewModel by lazy {
+        ViewModelProvider(this).get(WeatherListViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +63,6 @@ class WeatherListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.recycleView.adapter = adapter
         binding.floatActionButton.setOnClickListener {changeWeatherDataSet()}
-        viewModel = ViewModelProvider(this).get(WeatherListViewModel::class.java)
         viewModel.getData().observe(viewLifecycleOwner, Observer {
             renderData(it) })
         viewModel.getWeatherRus()
@@ -86,7 +88,7 @@ class WeatherListFragment : Fragment() {
         adapter.removeListener()
         super.onDestroy()
     }
-    fun renderData(data: AppState){
+    private fun renderData(data: AppState){
         when(data){
             is AppState.Error -> {
                 binding.loadingLayout.visibility = View.GONE
@@ -96,8 +98,10 @@ class WeatherListFragment : Fragment() {
             is AppState.Success -> {
                 binding.loadingLayout.visibility = View.GONE
                 adapter.setWeather(data.weatherData)
-                Toast.makeText(requireContext(),"успешная загрузка", Toast.LENGTH_LONG).show()
+                Snackbar.make(binding.root, "Работает", Snackbar.LENGTH_LONG).show()
+
             }
         }
     }
+
 }
