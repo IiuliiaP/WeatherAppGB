@@ -25,5 +25,4 @@ class WeatherListViewModel(private val liveData: MutableLiveData<AppState> = Mut
             }
         }.start()
     }
-
     }
