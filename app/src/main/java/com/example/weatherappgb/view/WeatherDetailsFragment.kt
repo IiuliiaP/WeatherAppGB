@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.weatherappgb.R
 import com.example.weatherappgb.databinding.FragmentWeatherDetailsBinding
-import com.example.weatherappgb.model.Weather
+import com.example.weatherappgb.model.*
 
-class WeatherDetailsFragment : Fragment() {
+class WeatherDetailsFragment : Fragment(), OnServerResponse {
 
     private var _binding: FragmentWeatherDetailsBinding? = null
     private val binding: FragmentWeatherDetailsBinding
@@ -38,16 +38,27 @@ class WeatherDetailsFragment : Fragment() {
         _binding = FragmentWeatherDetailsBinding.inflate(inflater, container,false)
         return binding.root
     }
+    lateinit var currentWeather: Weather
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        arguments?.getParcelable<Weather>(BUNDLE_EXTRA)?.let { val city = it.city
-            binding.cityName.text = city.name
-            binding.coordinates.text = String.format(
-                getString(R.string.city_coordinates),
-                city.lat.toString(),
-                city.lon.toString()
+        arguments?.getParcelable<Weather>(BUNDLE_EXTRA)?.let {
+            currentWeather = it
+            WeatherLoader(this@WeatherDetailsFragment)
+                .loadWeather(it.city.lon, it.city.lat)
+        }
+    }
+    private fun renderData(weatherDTO:WeatherDTO){
+        with(binding){
+            cityName.text = currentWeather.city.name
+            coordinates.text = String.format(
+                getString(R.string.city_coordinates), currentWeather.city.lat.toString()
+                ,currentWeather.city.lon.toString()
             )
-            binding.temperature.text = it.temperature.toString()
-            binding.feelsLike.text = it.feelsLike.toString() }
+            temperature.text = weatherDTO.factDTO?.temp.toString()
+            feelsLike.text = weatherDTO.factDTO?.feels_like.toString()
+        }
     }
+    override fun onResponse(weatherDTO: WeatherDTO) {
+        renderData(weatherDTO)
     }
+}
