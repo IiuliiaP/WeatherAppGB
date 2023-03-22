@@ -31,7 +31,7 @@ class WeatherListFragment : Fragment() {
             val manager = activity?.supportFragmentManager
             if (manager != null) {
                 val bundle = Bundle()
-                bundle.putParcelable(WeatherDetailsFragment.BUNDLE_EXTRA, weather)
+                bundle.putParcelable(WeatherDetailsFragment.KEY_BUNDLE_WEATHER, weather)
                 manager.beginTransaction()
                     .replace(R.id.fragment_container, WeatherDetailsFragment.newInstance(bundle))
                     .addToBackStack("")

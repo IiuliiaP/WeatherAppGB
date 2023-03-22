@@ -21,10 +21,7 @@ class DetailsService(val name: String = ""): IntentService(name) {
             val uri = URL(urlText)
             val urlConnection: HttpsURLConnection = (uri.openConnection() as HttpsURLConnection).apply {
                     connectTimeout = 1000
-                    addRequestProperty(
-                        KEY_REQUEST_API_KEY,
-                        "d9686252-f05e-47fc-a78c-ef84a32d3d0b"
-                    )
+                    addRequestProperty(KEY_REQUEST_API_KEY, YANDEX_KEY_VALUE)
                 }
             val headers = urlConnection.headerFields
             val responseCode = urlConnection.responseCode

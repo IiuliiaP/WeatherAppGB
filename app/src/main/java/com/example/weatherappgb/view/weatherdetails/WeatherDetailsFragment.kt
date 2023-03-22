@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.weatherappgb.KEY_BUNDLE_WEATHER
+
 import com.example.weatherappgb.R
 import com.example.weatherappgb.databinding.FragmentWeatherDetailsBinding
 import com.example.weatherappgb.model.*
@@ -20,7 +20,7 @@ class WeatherDetailsFragment : Fragment(), OnServerResponse {
     }
 
     companion object {
-
+        const val KEY_BUNDLE_WEATHER = "weather"
         fun newInstance(bundle: Bundle): WeatherDetailsFragment {
             val fragment = WeatherDetailsFragment()
             fragment.arguments = bundle
