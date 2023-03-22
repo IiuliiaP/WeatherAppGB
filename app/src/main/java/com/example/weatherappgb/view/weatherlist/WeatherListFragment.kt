@@ -1,4 +1,4 @@
-package com.example.weatherappgb.view
+package com.example.weatherappgb.view.weatherlist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +12,7 @@ import com.example.weatherappgb.R
 
 import com.example.weatherappgb.databinding.FragmentWeatherListBinding
 import com.example.weatherappgb.model.Weather
+import com.example.weatherappgb.view.weatherdetails.WeatherDetailsFragment
 import com.example.weatherappgb.viewmodel.AppState
 import com.example.weatherappgb.viewmodel.WeatherListViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -30,7 +31,7 @@ class WeatherListFragment : Fragment() {
             val manager = activity?.supportFragmentManager
             if (manager != null) {
                 val bundle = Bundle()
-                bundle.putParcelable(WeatherDetailsFragment.BUNDLE_EXTRA, weather)
+                bundle.putParcelable(WeatherDetailsFragment.KEY_BUNDLE_WEATHER, weather)
                 manager.beginTransaction()
                     .replace(R.id.fragment_container, WeatherDetailsFragment.newInstance(bundle))
                     .addToBackStack("")

@@ -1,4 +1,4 @@
-package com.example.weatherappgb.view
+package com.example.weatherappgb.view.weatherlist
 
 import com.example.weatherappgb.model.Weather
 
