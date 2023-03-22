@@ -10,7 +10,6 @@ import com.google.gson.JsonSyntaxException
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.URL
-import java.util.stream.Collectors
 import javax.net.ssl.HttpsURLConnection
 
 
@@ -49,7 +48,9 @@ class WeatherLoader(private val onServerResponseListener: OnServerResponse) {
                 }
 
 
-            } catch (e: JsonSyntaxException){}
+            } catch (e: JsonSyntaxException){
+
+            }
             finally {
                 urlConnection.disconnect()
             }
