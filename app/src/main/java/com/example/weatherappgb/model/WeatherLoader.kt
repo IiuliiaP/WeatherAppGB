@@ -2,6 +2,7 @@ package com.example.weatherappgb.model
 
 import android.os.Handler
 import android.os.Looper
+import com.example.weatherappgb.model.dto.WeatherDTO
 import com.google.gson.Gson
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -9,7 +10,10 @@ import java.net.URL
 import java.util.stream.Collectors
 import javax.net.ssl.HttpsURLConnection
 
+
+
 class WeatherLoader(private val onServerResponseListener: OnServerResponse) {
+
     fun loadWeather(lat: Double, lon: Double)  {
         Thread{
             val urlText = "https://api.weather.yandex.ru/v2/informers?lat=${lat}&lon=${lon}"
@@ -27,4 +31,6 @@ class WeatherLoader(private val onServerResponseListener: OnServerResponse) {
     }
     private fun getLines(reader: BufferedReader): String {
         return reader.lines().collect(Collectors.joining("\n")) }
+
+
 }

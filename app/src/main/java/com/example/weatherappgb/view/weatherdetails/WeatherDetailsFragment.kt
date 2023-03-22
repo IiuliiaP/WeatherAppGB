@@ -1,13 +1,15 @@
-package com.example.weatherappgb.view
+package com.example.weatherappgb.view.weatherdetails
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.weatherappgb.KEY_BUNDLE_WEATHER
 import com.example.weatherappgb.R
 import com.example.weatherappgb.databinding.FragmentWeatherDetailsBinding
 import com.example.weatherappgb.model.*
+import com.example.weatherappgb.model.dto.WeatherDTO
 
 class WeatherDetailsFragment : Fragment(), OnServerResponse {
 
@@ -18,8 +20,8 @@ class WeatherDetailsFragment : Fragment(), OnServerResponse {
     }
 
     companion object {
-        const val BUNDLE_EXTRA = "weather"
-        fun newInstance(bundle: Bundle): WeatherDetailsFragment{
+
+        fun newInstance(bundle: Bundle): WeatherDetailsFragment {
             val fragment = WeatherDetailsFragment()
             fragment.arguments = bundle
             return fragment
@@ -41,13 +43,13 @@ class WeatherDetailsFragment : Fragment(), OnServerResponse {
     lateinit var currentWeather: Weather
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        arguments?.getParcelable<Weather>(BUNDLE_EXTRA)?.let {
+        arguments?.getParcelable<Weather>(KEY_BUNDLE_WEATHER)?.let {
             currentWeather = it
             WeatherLoader(this@WeatherDetailsFragment)
                 .loadWeather(it.city.lon, it.city.lat)
         }
     }
-    private fun renderData(weatherDTO:WeatherDTO){
+    private fun renderData(weatherDTO: WeatherDTO){
         with(binding){
             cityName.text = currentWeather.city.name
             coordinates.text = String.format(
