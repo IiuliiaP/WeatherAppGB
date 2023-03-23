@@ -7,6 +7,6 @@ import kotlinx.parcelize.Parcelize
 data class FactDTO(
     val condition: String,
     val feels_like: Int?,
-    val icon: String?,
+    val icon: String,
     val temp: Int?
     ):Parcelable
