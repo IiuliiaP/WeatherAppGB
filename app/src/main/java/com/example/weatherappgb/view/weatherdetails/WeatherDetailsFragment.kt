@@ -67,6 +67,7 @@ class WeatherDetailsFragment : Fragment() {
             is DetailsState.Success -> {
                 val weather = detailsState.weather
                 with(binding){
+                    loadingLayout.visibility = View.GONE
                     cityName.text = currentWeather.city.name
                     coordinates.text = String.format(
                         getString(R.string.city_coordinates), currentWeather.city.lat.toString()
