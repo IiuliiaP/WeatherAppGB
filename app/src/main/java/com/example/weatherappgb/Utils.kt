@@ -18,5 +18,5 @@ const val YANDEX_DOMAIN = "https://api.weather.yandex.ru/"
 const val YANDEX_ENDPOINT = "v2/informers?"
 fun convertDtoToModel(weatherDTO: WeatherDTO): Weather {
     val fact: FactDTO? = weatherDTO.factDTO
-    return (Weather(getDefaultCity(), fact!!.temp!!, fact.feels_like!!))
+    return (Weather(getDefaultCity(), fact!!.temp!!, fact.feels_like!!,fact.icon))
 }

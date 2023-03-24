@@ -5,12 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import coil.load
+import com.bumptech.glide.Glide
 import com.example.weatherappgb.*
 import com.example.weatherappgb.databinding.FragmentWeatherDetailsBinding
 import com.example.weatherappgb.model.*
-import com.example.weatherappgb.model.dto.WeatherDTO
+import coil.ImageLoader
+import coil.decode.SvgDecoder
+import coil.request.ImageRequest
 import com.example.weatherappgb.viewmodel.DetailsState
 import com.example.weatherappgb.viewmodel.DetailsViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -75,9 +80,27 @@ class WeatherDetailsFragment : Fragment() {
                     )
                     temperature.text = weather.temperature.toString()
                     feelsLike.text = weather.feelsLike.toString()
+                    Glide.with(requireContext())
+                       .load("https://freepngimg.com/thumb/house/84949-house-housing-recreation-city-hd-image-free-png.png")
+                       .into(headerIcon)
+                    weatherIcon.loadSvg("https://yastatic.net/weather/i/icons/blueye/color/svg/${weather.icon}.svg")
                 }
             }
         }
     }
+
+    fun ImageView.loadSvg(url:String){
+        val imageLoader = ImageLoader.Builder(this.context)
+            .componentRegistry { add(SvgDecoder(this@loadSvg.context)) }
+            .build()
+        val request = ImageRequest.Builder(this.context)
+            .crossfade(true)
+            .crossfade(500)
+            .data(url)
+            .target(this)
+            .build()
+        imageLoader.enqueue(request)
+    }
+
 
 }

@@ -6,7 +6,9 @@ import kotlinx.android.parcel.Parcelize
 data class Weather(
     var city: City = getDefaultCity(),
     val temperature: Int = 0,
-    val feelsLike: Int = 0):Parcelable
+    val feelsLike: Int = 0,
+    val icon: String = "ovc"
+):Parcelable
 @Parcelize
 data class City(val name: String, val lat: Double, val lon: Double): Parcelable
 

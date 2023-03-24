@@ -17,7 +17,7 @@ class DetailsRepositoryRetrofitImpl: DetailsRepository {
         val weatherAPI = Retrofit.Builder().apply {
             baseUrl(YANDEX_DOMAIN)
             addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
-        }.build().create(WeatherAPI::class.java)//создание ретрофита + запрос
+        }.build().create(WeatherAPI::class.java)
 
         weatherAPI.getWeather(YANDEX_KEY_VALUE, city.lat, city.lon).enqueue(object : Callback<WeatherDTO>{
             override fun onResponse(call: Call<WeatherDTO>, response: Response<WeatherDTO>) {
