@@ -3,12 +3,12 @@ package com.example.weatherappgb.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.weatherappgb.model.City
-import com.example.weatherappgb.model.DetailsRepository
-import com.example.weatherappgb.model.DetailsRepositoryRetrofitImpl
+import com.example.weatherappgb.model.detailsrepository.DetailsRepository
+import com.example.weatherappgb.model.detailsrepository.DetailsRepositoryRetrofitImpl
 import com.example.weatherappgb.model.Weather
 
 class DetailsViewModel(private val liveData: MutableLiveData<DetailsState> = MutableLiveData(),
-                       private val repository: DetailsRepository =DetailsRepositoryRetrofitImpl ()
+                       private val repository: DetailsRepository = DetailsRepositoryRetrofitImpl ()
 ) : ViewModel() {
     fun getLiveData() = liveData
 

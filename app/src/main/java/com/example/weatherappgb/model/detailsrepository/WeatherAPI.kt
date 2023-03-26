@@ -1,4 +1,4 @@
-package com.example.weatherappgb.model
+package com.example.weatherappgb.model.detailsrepository
 
 import com.example.weatherappgb.KEY_LAT_EXTRA
 import com.example.weatherappgb.KEY_LON_EXTRA
