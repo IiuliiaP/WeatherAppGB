@@ -16,12 +16,18 @@ class RoomRepositoryImpl: DetailsRepositoryAll, DetailsRepository , DetailsRepos
     }
 
     override fun getWeatherDetails(city: City, callback: DetailsViewModel.Callback) {
-        val list = convertHistoryEntityToWeather(App.getHistoryDao().getHistoryForCity(city.name))
-        callback.onResponse(list.last())
+        Thread{
+            val list = convertHistoryEntityToWeather(App.getHistoryDao().getHistoryForCity(city.name))
+            callback.onResponse(list.last())
+        }.start()
+
 
     }
     override fun addWeather(weather: Weather) {
-        App.getHistoryDao().insert(convertWeatherToEntity(weather))
+        Thread{
+            App.getHistoryDao().insert(convertWeatherToEntity(weather))
+        }.start()
+
     }
     fun convertHistoryEntityToWeather(entityList: List<HistoryEntity>):List<Weather> {
         return entityList.map {
