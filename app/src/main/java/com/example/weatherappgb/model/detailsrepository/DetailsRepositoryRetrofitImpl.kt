@@ -1,8 +1,9 @@
-package com.example.weatherappgb.model
+package com.example.weatherappgb.model.detailsrepository
 
 import com.example.weatherappgb.YANDEX_DOMAIN
 import com.example.weatherappgb.YANDEX_KEY_VALUE
 import com.example.weatherappgb.convertDtoToModel
+import com.example.weatherappgb.model.City
 import com.example.weatherappgb.model.dto.WeatherDTO
 import com.example.weatherappgb.viewmodel.DetailsViewModel
 import com.google.gson.GsonBuilder
