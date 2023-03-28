@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="24dp"
-        android:src="@drawable/russia_ic"
+        android:src="@drawable/ic_russia"
         app:maxImageSize="56dp"
         app:tint="@null"/>
 

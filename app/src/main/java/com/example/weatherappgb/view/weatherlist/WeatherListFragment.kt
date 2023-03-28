@@ -73,10 +73,10 @@ class WeatherListFragment : Fragment() {
     private fun changeWeatherDataSet() {
         if (isDataSetRus) {
             viewModel.getWeatherWorld()
-            binding.floatActionButton.setImageResource(R.drawable.planet_ic)
+            binding.floatActionButton.setImageResource(R.drawable.ic_planet)
         } else {
             viewModel.getWeatherRus()
-            binding.floatActionButton.setImageResource(R.drawable.russia_ic)
+            binding.floatActionButton.setImageResource(R.drawable.ic_russia)
         }
         isDataSetRus = !isDataSetRus
     }
@@ -98,7 +98,7 @@ class WeatherListFragment : Fragment() {
             is AppState.Loading -> binding.loadingLayout.visibility = View.VISIBLE
             is AppState.Success -> {
                 binding.loadingLayout.visibility = View.GONE
-                adapter.setWeather(data.weatherData)
+                adapter.setWeather(data.weatherList)
                 Snackbar.make(binding.root, "Работает", Snackbar.LENGTH_LONG).show()
 
             }

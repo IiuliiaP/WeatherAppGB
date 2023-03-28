@@ -10,22 +10,21 @@ class App: Application() {
         super.onCreate()
         appContext = this
     }
-    companion object{
+
+    companion object {
         private var db: DataBase? = null
-        private var appContext:App?=null
+        private var appContext: App? = null
 
-        fun getHistoryDao():HistoryDao{
-            if (db == null){
-                if(appContext!=null){
-                    Thread{
-                        db = Room.databaseBuilder(appContext!!, DataBase::class.java, "db_name")
+        fun getHistoryDao(): HistoryDao {
+            if (db == null) {
+                if (appContext != null) {
+                    db = Room.databaseBuilder(appContext!!, DataBase::class.java, "db_name").allowMainThreadQueries()
                             .build()
-                    }.start()
 
-                }else throw IllegalStateException("Application is null while creating DataBase")
-
-            }
+                    } else throw IllegalStateException("Application is null while creating DataBase")
+                }
             return db!!.historyDao()
+
         }
     }
 }
