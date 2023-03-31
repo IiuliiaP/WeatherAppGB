@@ -13,4 +13,11 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="history">history</string>
+    <string name="content_provider">content_provider</string>
+    <string name="work_with_content_provider">work with content provider</string>
+    <string name="alert_dialogue_message">для совершения звонков необходимо предоставить доступ к контактам</string>
+    <string name="alert_dialogue_title">доступ к контактам</string>
+    <string name="permission_positive">предоставить доступ</string>
+    <string name="permission_negative">не надо</string>
 </resources>

@@ -31,6 +31,11 @@ class MainActivity : AppCompatActivity() {
                  .add(R.id.fragment_container, HistoryListFragment.newInstance())
                  .addToBackStack("").commit()
          }
+         R.id.menu_content_provider-> {
+             supportFragmentManager.beginTransaction()
+                 .add(R.id.fragment_container, ContentProviderFragment.newInstance())
+                 .addToBackStack("").commit()
+         }
      }
         return super.onOptionsItemSelected(item)
     }
