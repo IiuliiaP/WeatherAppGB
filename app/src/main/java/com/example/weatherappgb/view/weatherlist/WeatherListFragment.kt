@@ -56,11 +56,6 @@ class WeatherListFragment : Fragment() {
     val viewModel: WeatherListViewModel by lazy {
         ViewModelProvider(this).get(WeatherListViewModel::class.java)
     }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -115,7 +110,6 @@ class WeatherListFragment : Fragment() {
     }
     private val locationListenerDistance = object : LocationListener {
         override fun onLocationChanged(location: Location) {
-            Log.d("@@@",location.toString())
             getAddressByLocation(location)
         }
         override fun onProviderDisabled(provider: String) {
@@ -127,11 +121,11 @@ class WeatherListFragment : Fragment() {
 
     }
     fun getAddressByLocation(location: Location){
-        val geocoder = Geocoder(context!!)
+        val geocoder = Geocoder(requireContext())
         Thread{
             try {
                 val addressText =
-                    geocoder.getFromLocation(location.latitude, location.longitude, 1,)!![0]
+                    geocoder.getFromLocation(location.latitude, location.longitude,1)!![0]
                         .getAddressLine(0)
                 requireActivity().runOnUiThread {
                     showAddressDialog(addressText, location)
@@ -183,11 +177,7 @@ class WeatherListFragment : Fragment() {
                 .setPositiveButton(getString(R.string.dialog_address_get_weather)) { _, _ ->
                    openDetailsFragment(
                         Weather(
-                            City(
-                                address,
-                                location.latitude,
-                                location.longitude
-                            )
+                            City(address, location.latitude, location.longitude)
                         )
                     )
                 }
@@ -211,9 +201,6 @@ class WeatherListFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-    override fun onDestroy() {
-        super.onDestroy()
         adapter.removeListener()
     }
     private fun renderData(data: AppState){
@@ -231,5 +218,4 @@ class WeatherListFragment : Fragment() {
             }
         }
     }
-
 }

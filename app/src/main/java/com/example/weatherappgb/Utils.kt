@@ -16,6 +16,8 @@ const val KEY_WAVE_SERVICE_BROADCAST = "myaction_way"
 
 const val YANDEX_DOMAIN = "https://api.weather.yandex.ru/"
 const val YANDEX_ENDPOINT = "v2/informers?"
+
+const val YANDEX_KEY_MAPKIT ="0cc82e00-0aa6-47b8-8b67-48e85e2e718a"
 fun convertDtoToModel(weatherDTO: WeatherDTO): Weather {
     val fact: FactDTO? = weatherDTO.factDTO
     return (Weather(getDefaultCity(), fact!!.temp!!, fact.feels_like!!,fact.icon))

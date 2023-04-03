@@ -36,6 +36,11 @@ class MainActivity : AppCompatActivity() {
                  .add(R.id.fragment_container, ContentProviderFragment.newInstance())
                  .addToBackStack("").commit()
          }
+         R.id.menu_yandex_map-> {
+             supportFragmentManager.beginTransaction()
+                 .add(R.id.fragment_container, YandexMapFragment.newInstance())
+                 .addToBackStack("").commit()
+         }
      }
         return super.onOptionsItemSelected(item)
     }
