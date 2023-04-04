@@ -1,20 +1,24 @@
 package com.example.weatherappgb.view
 
 import android.content.ContentResolver
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.example.weatherappgb.R
 import com.example.weatherappgb.databinding.FragmentContentProviderBinding
 
+
 const val REQUEST_CODE = 42
+
 class ContentProviderFragment : Fragment() {
 
     private var _binding: FragmentContentProviderBinding? = null
@@ -39,11 +43,13 @@ class ContentProviderFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         checkPermission()
-
     }
-    private fun checkPermission(){
-        if(ContextCompat.checkSelfPermission(requireContext(),
-                android.Manifest.permission.READ_CONTACTS)==PackageManager.PERMISSION_GRANTED){
+    private fun checkPermission() {
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                android.Manifest.permission.READ_CONTACTS
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
             getContacts()
         }else if (shouldShowRequestPermissionRationale(android.Manifest.permission.READ_CONTACTS)){
             explain()
@@ -104,6 +110,7 @@ class ContentProviderFragment : Fragment() {
             }
         }
     }
+
 
     companion object {
         @JvmStatic

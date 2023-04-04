@@ -5,19 +5,31 @@
     <string name="feels_like_label">Ощущается как</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main_web_view">MainActivityWebView</string>
-    <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="history">history</string>
+    <!-- доступ к контактам-->
     <string name="content_provider">content_provider</string>
     <string name="work_with_content_provider">work with content provider</string>
-    <string name="alert_dialogue_message">для совершения звонков необходимо предоставить доступ к контактам</string>
-    <string name="alert_dialogue_title">доступ к контактам</string>
-    <string name="permission_positive">предоставить доступ</string>
-    <string name="permission_negative">не надо</string>
+    <string name="alert_dialogue_message">Для совершения звонков необходимо предоставить доступ к контактам</string>
+    <string name="alert_dialogue_title">Доступ к контактам</string>
+    <string name="permission_positive">Предоставить доступ</string>
+    <string name="permission_negative">Не надо</string>
+    <!-- карты -->
+    <string name="dialog_button_close">Закрыть</string>
+    <string name="dialog_title_no_gps">Доступ к геолокации закрыт</string>
+    <string name="dialog_message_no_gps">Разрешите доступ к геолокации, если хотите узнать погоду текущего места</string>
+    <string name="dialog_title_gps_turned_off">GPS отключён</string>
+    <string name="dialog_message_last_location_unknown">Местонахождение неизвестно. Включите GPS, если хотите получить погоду по текущему адресу</string>
+    <string name="dialog_message_last_known_location">Показана последняя известная локация. Включите GPS, если хотите обновить местонахождение</string>
+    <string name="dialog_rationale_title">Доступ к геолокации</string>
+    <string name="dialog_rationale_message">Для доступа к погоде по локации, предоставте доступ к местоположению </string>
+    <string name="dialog_rationale_give_access">Предоставить доступ</string>
+    <string name="dialog_rationale_decline">Не надо</string>
+    <string name="dialog_address_title">Ваш адрес</string>
+    <string name="dialog_address_get_weather">Узнать погоду</string>
+    <string name="yandex_map">yandex_map</string>
+    <string name="search">Поиск</string>
 </resources>

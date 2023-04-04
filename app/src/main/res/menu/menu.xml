@@ -11,5 +11,10 @@
         android:id="@+id/menu_content_provider"
         android:icon="@drawable/ic_phone"
         android:title="@string/content_provider"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_yandex_map"
+        android:icon="@drawable/ic_map"
+        android:title="@string/yandex_map"
         app:showAsAction="always" />
 </menu>

@@ -13,15 +13,27 @@
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/float_action_button"
+        android:id="@+id/float_action_button_change_setup"
         android:contentDescription=" "
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="24dp"
+        android:layout_margin="@dimen/margin_fab"
         android:src="@drawable/ic_russia"
-        app:maxImageSize="56dp"
+        app:maxImageSize="@dimen/max_size_fab"
         app:tint="@null"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/float_action_button_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="@dimen/margin_fab"
+        android:src="@android:drawable/ic_dialog_map"
+        app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="@dimen/max_size_fab"
+        app:tint="@null" />
 
     <FrameLayout
         android:id="@+id/loading_layout"
