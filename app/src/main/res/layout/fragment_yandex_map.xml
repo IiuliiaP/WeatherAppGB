@@ -4,10 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.YandexMapFragment">
+    <EditText
+        android:id="@+id/search_address"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:inputType="text"
+        android:background="@color/white"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="12dp"
+        android:hint="@string/search"
+        android:visibility="visible"/>
+
 
     <com.yandex.mapkit.mapview.MapView
         android:id="@+id/mapview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+    </com.yandex.mapkit.mapview.MapView>
 
 </FrameLayout>
