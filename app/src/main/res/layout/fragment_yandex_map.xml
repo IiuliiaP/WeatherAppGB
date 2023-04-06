@@ -13,7 +13,8 @@
         android:layout_marginTop="12dp"
         android:layout_marginStart="12dp"
         android:hint="@string/search"
-        android:visibility="visible"/>
+        android:visibility="visible"
+        android:autofillHints="postalAddress" />
 
 
     <com.yandex.mapkit.mapview.MapView
