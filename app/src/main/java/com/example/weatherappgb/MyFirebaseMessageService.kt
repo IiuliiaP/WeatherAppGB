@@ -15,7 +15,7 @@ import com.google.firebase.messaging.RemoteMessage
 
 class MyFirebaseMessageService : FirebaseMessagingService() {
     companion object{
-       private const val SERVER_KEY = "AAAAIK3Zv3k:APA91bFJmv1AnqV6h11-WKJdPsa9CPHn7TA6K0ZwHXdBp-GDpDdq8ZaH2YvyglepMvS1b6qZk-lJSnVZthHEvfrDqoakyshzWGm5ht72Uylso2nJ9iUnXQrk3tr6xsmPewkOSZtvGaF1"
+
        private const val TITLE_KEY = "myTitle"
        private const val MESSAGE_KEY = "myMessage"
        private const val NOTIFICATION_ID = 1
