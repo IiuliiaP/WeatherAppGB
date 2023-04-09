@@ -4,14 +4,11 @@ package com.example.weatherappgb.view
 import android.content.pm.PackageManager
 import android.graphics.PointF
 import android.os.Bundle
-
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
-
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -41,8 +38,9 @@ import com.yandex.runtime.network.RemoteError
 
 
 class YandexMapFragment : Fragment(), UserLocationObjectListener, Session.SearchListener, CameraListener{
-    lateinit var mapView: MapView
-    lateinit var locationMap: UserLocationLayer
+   private val mapView: MapView = binding.mapview
+    private val mapKit: MapKit = MapKitFactory.getInstance()
+    private val locationMap: UserLocationLayer = mapKit.createUserLocationLayer(mapView.mapWindow)
     private var _binding: FragmentYandexMapBinding? = null
     private val binding: FragmentYandexMapBinding
         get() {
@@ -56,15 +54,14 @@ class YandexMapFragment : Fragment(), UserLocationObjectListener, Session.Search
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         MapKitFactory.initialize(requireContext())
-        mapView = binding.mapview
         mapView.map.move(
             CameraPosition( Point(55.751574, 37.573856), 11.0f, 0.0f, 0.0f),
             Animation(Animation.Type.SMOOTH, 0F),null)
         checkPermission()
         SearchFactory.initialize(requireContext())
-        searchManager = SearchFactory.getInstance().createSearchManager(SearchManagerType.COMBINED)
+
         mapView.map.addCameraListener(this)
-      binding.searchAddress.setOnEditorActionListener { v, action, keyEvent ->
+      binding.searchAddress.setOnEditorActionListener { v, action, event ->
           if(action == EditorInfo.IME_ACTION_SEARCH){
               initSearchByAddress(binding.searchAddress.text.toString())
           }
@@ -72,10 +69,11 @@ class YandexMapFragment : Fragment(), UserLocationObjectListener, Session.Search
       }
 
     }
-    lateinit var searchManager: SearchManager
-    lateinit var searchSession: Session
+
+
     private fun initSearchByAddress(query: String){
-        searchSession = searchManager.submit(
+        val searchManager : SearchManager= SearchFactory.getInstance().createSearchManager(SearchManagerType.COMBINED)
+        val searchSession: Session = searchManager.submit(
            query,VisibleRegionUtils.toPolygon(mapView.map.visibleRegion),
            SearchOptions(),this
        )
@@ -108,8 +106,6 @@ class YandexMapFragment : Fragment(), UserLocationObjectListener, Session.Search
         }
     }
      private fun getLocation(){
-         val mapKit: MapKit = MapKitFactory.getInstance()
-         locationMap= mapKit.createUserLocationLayer(mapView.mapWindow)
          locationMap.isVisible = true
          locationMap.setObjectListener(this)
      }
@@ -191,9 +187,7 @@ class YandexMapFragment : Fragment(), UserLocationObjectListener, Session.Search
         mapObject.clear()
         for(searchResult in response.collection.children) {
             val resultLocation = searchResult.obj!!.geometry[0].point!!
-            if(response!= null){
-                mapObject.addPlacemark(resultLocation,ImageProvider.fromResource(requireContext(),R.drawable.ic_navigation))
-            }
+            mapObject.addPlacemark(resultLocation,ImageProvider.fromResource(requireContext(),R.drawable.ic_navigation))
         }
     }
 
