@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import com.example.weatherappgb.R
 import com.example.weatherappgb.YANDEX_KEY_MAPKIT
 import com.example.weatherappgb.databinding.FragmentYandexMapBinding
+
 import com.yandex.mapkit.Animation
 import com.yandex.mapkit.MapKit
 import com.yandex.mapkit.MapKitFactory
@@ -41,6 +42,7 @@ class YandexMapFragment : Fragment(), UserLocationObjectListener, Session.Search
    private val mapView: MapView = binding.mapview
     private val mapKit: MapKit = MapKitFactory.getInstance()
     private val locationMap: UserLocationLayer = mapKit.createUserLocationLayer(mapView.mapWindow)
+
     private var _binding: FragmentYandexMapBinding? = null
     private val binding: FragmentYandexMapBinding
         get() {
@@ -57,8 +59,9 @@ class YandexMapFragment : Fragment(), UserLocationObjectListener, Session.Search
         mapView.map.move(
             CameraPosition( Point(55.751574, 37.573856), 11.0f, 0.0f, 0.0f),
             Animation(Animation.Type.SMOOTH, 0F),null)
-        checkPermission()
+
         SearchFactory.initialize(requireContext())
+        getLocation()
 
         mapView.map.addCameraListener(this)
       binding.searchAddress.setOnEditorActionListener { v, action, event ->
@@ -91,54 +94,13 @@ class YandexMapFragment : Fragment(), UserLocationObjectListener, Session.Search
         _binding = null
     }
 
-    private fun checkPermission() {
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                android.Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            getLocation()
-        } else if (shouldShowRequestPermissionRationale(android.Manifest.permission.ACCESS_FINE_LOCATION)) {
 
-            explain()
-        } else {
-            mRequestPermission()
-        }
-    }
      private fun getLocation(){
          locationMap.isVisible = true
          locationMap.setObjectListener(this)
      }
-    private fun explain() {
-        AlertDialog.Builder(requireContext())
-            .setTitle(resources.getString(R.string.dialog_rationale_title))
-            .setMessage(resources.getString(R.string.dialog_rationale_message))
-            .setPositiveButton(resources.getString(R.string.dialog_rationale_give_access)) { _, _ ->
-                mRequestPermission()
-            }
-            .setNegativeButton(getString(R.string.dialog_rationale_decline)) { dialog, _ -> dialog.dismiss() }
-            .create()
-            .show()
-    }
-    private fun mRequestPermission() {
-        requestPermissions(arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 0)
-    }
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        if(requestCode == 0){
-            for (i in permissions.indices) {
-                if (permissions[i] == android.Manifest.permission.ACCESS_FINE_LOCATION && grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                    getLocation()
-                } else {
-                    explain()
-                }
-            }
 
-        }else super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-    }
+
     override fun onStart() {
         super.onStart()
         mapView.onStart()
