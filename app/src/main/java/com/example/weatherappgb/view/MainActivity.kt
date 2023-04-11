@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.fragment.app.Fragment
 import com.example.weatherappgb.R
 import com.example.weatherappgb.view.history.HistoryListFragment
 
@@ -27,22 +28,22 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
      when(item.itemId){
          R.id.menu_history-> {
-             supportFragmentManager.beginTransaction()
-                 .add(R.id.fragment_container, HistoryListFragment.newInstance())
-                 .addToBackStack("").commit()
+             navigate(HistoryListFragment.newInstance())
          }
          R.id.menu_content_provider-> {
-             supportFragmentManager.beginTransaction()
-                 .add(R.id.fragment_container, ContentProviderFragment.newInstance())
-                 .addToBackStack("").commit()
+           navigate(ContentProviderFragment.newInstance())
          }
          R.id.menu_yandex_map-> {
-             supportFragmentManager.beginTransaction()
-                 .add(R.id.fragment_container, YandexMapFragment.newInstance())
-                 .addToBackStack("").commit()
+            navigate(YandexMapFragment.newInstance())
          }
      }
+
         return super.onOptionsItemSelected(item)
+    }
+    private fun navigate(fragment: Fragment){
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragment_container, fragment)
+            .addToBackStack("").commit()
     }
 
 }
